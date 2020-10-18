@@ -9,6 +9,7 @@ FROM パーティー
 SELECT 名称 AS 名前,HP AS 現在のHP,MP AS 現在のMP
 FROM パーティー
 
+
 -- ◆解答
  正解
 
@@ -24,7 +25,7 @@ SELECT イベント番号 AS 番号,イベント名称 AS 場面
 FROM イベント
 
 -- ◆解答
- 正解
+--  正解
 
 -- 5
 INSERT INTO パーティー
