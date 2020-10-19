@@ -120,3 +120,58 @@ UPDATE パーティー
 
 -- ◆解答
  正解
+
+ -- 16
+SELECT ID,名称,HP
+FROM パーティー
+WHERE HP BETWEEN 120 AND 160
+
+-- ◆解答
+ 正解
+
+  -- 17
+SELECT 名称,職業コード
+FROM パーティー
+WHERE 職業コード IN('01','10','11')
+
+-- ◆解答
+ 正解
+
+ -- 18
+SELECT 名称,職業コード
+FROM パーティー
+WHERE 職業コード NOT IN('00','09')
+
+-- ◆解答
+ 正解
+
+ -- 19
+SELECT *
+FROM パーティー
+WHERE  HP > 100 AND MP >100
+
+-- ◆解答
+ 正解
+
+ -- 20
+SELECT *
+FROM パーティー
+WHERE  ID LIKE 'A%' AND 職業コード LIKE '2%'
+
+-- ◆解答
+ 正解
+
+ -- 21
+SELECT *
+FROM イベント
+WHERE  タイプ ='1' AND 前提イベント番号 IS NOT NULL AND 後続イベント番号 IS NOT NULL
+
+-- ◆解答
+ 正解
+
+
+ -- 22
+ID ,イベント番号
+
+-- ◆解答
+ 正解
