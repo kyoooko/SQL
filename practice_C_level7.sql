@@ -1,0 +1,74 @@
+
+-- ◆⭐️62
+SELECT K.ルート番号,K.イベント番号, I.イベント名称, K.クリア結果
+  FROM イベント AS I
+  JOIN 経験イベント AS K
+  ON K.イベント番号 = I.イベント番号
+  WHERE K.クリア区分 = '1'
+ORDER BY K.ルート番号
+
+-- 副問合せで書くと
+SELECT K.ルート番号,K.イベント番号, (SELECT イベント名称 FROM イベント AS I WHERE  K.イベント番号 = I.イベント番号) AS イベント名称, K.クリア結果
+  FROM 経験イベント AS K
+  WHERE K.クリア区分 = '1'
+ORDER BY K.ルート番号
+
+-- ◆解答
+--  正解
+
+
+-- ◆63
+SELECT I.イベント番号, I.イベント名称, K.クリア区分
+  FROM イベント AS I
+  JOIN 経験イベント AS K
+  ON K.イベント番号 = I.イベント番号
+  WHERE I.タイプ = '1'
+
+  -- →未着手のイベントは考慮しなくて良い＝JOIN
+-- ◆解答
+--  正解
+
+-- ◆64
+SELECT I.イベント番号, I.イベント名称, COALESCE(K.クリア区分, '未クリア') AS クリア区分
+  FROM イベント AS I
+  LEFT JOIN 経験イベント AS K
+  ON K.イベント番号 = I.イベント番号
+  WHERE I.タイプ = '1'
+
+-- ◆解答
+--  正解
+
+-- ◆65(JOINの副問い合わせC：表)
+SELECT P.ID AS ID, P.名称 AS 名前, CS.コード名称 AS 職業, CJ.コード名称 AS 状態
+  FROM パーティー AS P
+  JOIN (SELECT コード名称 FROM コード WHERE コード種別 = '1') AS CS
+  ON CS.コード値 = P.職業コード
+  JOIN (SELECT コード名称 FROM コード WHERE  CJ.コード種別 = '2') AS CJ
+  ON CJ.コード値 = P.状態コード
+  -- できず→JOIN (SELECT にコード値必要だった
+
+  -- 副問合せ
+  SELECT P.ID AS ID, P.名称 AS 名前, (SELECT コード名称 FROM コード AS C WHERE  C.コード種別 = 1) AS 職業, (SELECT コード名称 FROM コード AS C WHERE  C.コード種別 = 2) AS 状態
+  FROM パーティー AS P
+  -- できず
+  -- ERROR: more than one row returned by a subquery used as an expression
+
+-- ◆解答
+SELECT P.ID, P.名称 AS なまえ,
+       S.コード名称 AS 職業, J.コード名称 AS 状態
+  FROM パーティー P
+  JOIN (SELECT コード値, コード名称
+          FROM コード
+         WHERE コード種別 ='1') S
+    ON P.職業コード = S.コード値
+  JOIN (SELECT コード値, コード名称
+          FROM コード
+         WHERE コード種別 ='2') J
+    ON P.状態コード = J.コード値
+ ORDER BY ID
+
+-- JOIN (SELECT コード値, コード名称〜)にコード値ないとONで繋げないので必要 P.262o
+
+-- ◆66
+
+-- ◆解答
